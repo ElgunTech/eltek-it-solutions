@@ -57,7 +57,7 @@ export default function About() {
               titleHighlight="Driven by Innovation"
               description="Founded in 2012, ElTek has grown from a local IT firm into a full-spectrum technology partner serving enterprises across multiple industries and regions."
               align="left"
-              id="about-heading"
+              
             />
 
             {/* Mission & Vision cards */}

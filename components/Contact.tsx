@@ -125,7 +125,7 @@ export default function Contact() {
             title="Start Your Digital"
             titleHighlight="Transformation"
             description="Tell us about your project or challenge — our experts will get back to you within one business day with tailored insights."
-            id="contact-heading"
+            
           />
         </div>
 

@@ -135,7 +135,7 @@ export default function Services() {
             title="Comprehensive IT"
             titleHighlight="Services"
             description="From securing your infrastructure to building your next product — ElTek delivers end-to-end technology solutions that scale with your ambition."
-            id="services-heading"
+           
           />
         </div>
 

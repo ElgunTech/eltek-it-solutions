@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "../styles/globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://elguntech.github.io'),
   title: {
     default: "ElTek – IT Solutions | Innovative Technology Partner",
     template: "%s | ElTek IT Solutions",

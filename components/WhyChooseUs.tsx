@@ -132,7 +132,7 @@ export default function WhyChooseUs() {
             title="The Advantage of Choosing"
             titleHighlight="the Right Partner"
             description="Hundreds of businesses trust ElTek because we combine technical depth with genuine partnership — the rare combination that makes a real difference."
-            id="why-us-heading"
+            
           />
         </div>
 
