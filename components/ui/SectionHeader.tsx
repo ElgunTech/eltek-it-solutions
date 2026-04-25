@@ -13,11 +13,6 @@ interface SectionHeaderProps {
   className?: string;
 }
 
-/**
- * Consistent animated section header used across all major sections.
- * Supports an eyebrow label, main title (with optional highlighted word),
- * and a descriptive paragraph.
- */
 export default function SectionHeader({
   eyebrow,
   title,
@@ -40,7 +35,6 @@ export default function SectionHeader({
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
     >
-      {/* Eyebrow */}
       {eyebrow && (
         <motion.div variants={fadeUpVariant}>
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium tracking-widest uppercase bg-eltek-500/10 text-eltek-500 dark:text-eltek-400 border border-eltek-500/20">
@@ -50,18 +44,14 @@ export default function SectionHeader({
         </motion.div>
       )}
 
-      {/* Title */}
       <motion.h2
         variants={fadeUpVariant}
         className="font-display font-bold text-3xl md:text-4xl lg:text-5xl leading-tight text-slate-900 dark:text-white"
       >
         {title}{" "}
-        {titleHighlight && (
-          <span className="gradient-text">{titleHighlight}</span>
-        )}
+        {titleHighlight && <span className="gradient-text">{titleHighlight}</span>}
       </motion.h2>
 
-      {/* Description */}
       {description && (
         <motion.p
           variants={fadeUpVariant}
