@@ -17,11 +17,22 @@ export default function HomePage() {
       <Navbar />
 
       {/* ─── Sections ──── */}
-      <Hero />
-      <Services />
-      <About />
-      <WhyChooseUs />
-      <Contact />
+      <div className="pt-20">
+        <Hero />
+      </div>
+
+      <div className="border-t border-white/5">
+        <Services />
+      </div>
+      <div className="border-t border-white/5">
+        <About />
+      </div>
+      <div className="border-t border-white/5">
+        <WhyChooseUs />
+      </div>
+      <div className="border-t border-white/5">
+        <Contact />
+      </div>
 
       {/* ─── Footer ────── */}
       <Footer />

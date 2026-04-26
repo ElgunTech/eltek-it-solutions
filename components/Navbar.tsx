@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: "Niyə Biz?", href: "#why-us" },
   { label: "Əlaqə", href: "#contact" },
 ];
+const JOIN_US_LINK = "https://forms.gle/X9voJbvsggq3GfCf6";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -82,8 +83,13 @@ export default function Navbar() {
 
         {/* CTA + mobile */}
         <div className="flex items-center gap-3">
-          <a href="#contact" className="hidden md:inline-flex btn-gold text-xs px-5 py-2.5">
-            Əlaqə Saxla
+          <a
+            href={JOIN_US_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:inline-flex btn-gold text-xs px-5 py-2.5"
+          >
+            Bizə Qoşulun
           </a>
           <button
             onClick={() => setMobileOpen((o) => !o)}
@@ -119,8 +125,14 @@ export default function Navbar() {
                   {label}
                 </a>
               ))}
-              <a href="#contact" onClick={() => setMobileOpen(false)} className="btn-gold mt-3 justify-center">
-                Əlaqə Saxla
+              <a
+                href={JOIN_US_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="btn-gold mt-3 justify-center"
+              >
+                Bizə Qoşulun
               </a>
             </div>
           </motion.div>

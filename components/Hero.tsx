@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
+const JOIN_US_LINK = "https://forms.gle/X9voJbvsggq3GfCf6";
 
 const STATS = [
   { value: "500+", label: "Tamamlanan Layihə" },
@@ -35,7 +36,7 @@ export default function Hero() {
       />
 
       {/* Floating particles */}
-      {[...Array(6)].map((_, i) => (
+      {[...Array(3)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-1 h-1 rounded-full"
@@ -46,7 +47,7 @@ export default function Hero() {
             opacity: 0.4,
           }}
           animate={{ y: [-10, 10, -10], opacity: [0.2, 0.6, 0.2] }}
-          transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
+          transition={{ duration: 4 + i * 0.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
         />
       ))}
 
@@ -109,6 +110,9 @@ export default function Hero() {
           </a>
           <a href="#services" className="btn-outline">
             Xidmətlərimizə Bax
+          </a>
+          <a href={JOIN_US_LINK} target="_blank" rel="noopener noreferrer" className="btn-outline">
+            Bizə Qoşulun
           </a>
         </motion.div>
 
