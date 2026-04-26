@@ -94,7 +94,6 @@ body {
 }
 .btn-gold:hover {
   background-position: right center;
-  transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(201,168,76,0.5);
 }
 .btn-gold:active { transform: scale(0.97); }
@@ -110,7 +109,6 @@ body {
   border-color: rgba(201,168,76,0.6);
   color: #C9A84C;
   background: rgba(201,168,76,0.06);
-  transform: translateY(-2px);
 }
 
 /* Glow effects */
@@ -179,3 +177,16 @@ body {
   100% { transform: translateX(-50%); }
 }
 .scroll-left { animation: scrollLeft 20s linear infinite; }
+
+/* Performance + accessibility */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

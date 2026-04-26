@@ -60,22 +60,13 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, delay: index * 0.12 }}
-      whileHover={{ y: -8 }}
+      whileHover={{ y: -4 }}
       className="group relative flex flex-col overflow-hidden rounded-2xl"
       style={{
         background: "rgba(255,255,255,0.03)",
         border: "1px solid rgba(255,255,255,0.07)",
-        transition: "all 0.4s ease",
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = `${service.accent}40`;
-        (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
-        (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 60px ${service.accent}15`;
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.07)";
-        (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)";
-        (e.currentTarget as HTMLElement).style.boxShadow = "none";
+        transition: "transform 0.25s ease, box-shadow 0.25s ease",
+        boxShadow: `0 10px 24px ${service.accent}10`,
       }}
     >
       {/* Image */}

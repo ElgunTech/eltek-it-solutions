@@ -99,18 +99,10 @@ export default function Contact() {
                 href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}
                 rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                whileHover={{ x: 6 }}
-                transition={{ type: "spring", stiffness: 400 }}
+                whileHover={{ x: 2 }}
+                transition={{ duration: 0.2 }}
                 className="flex items-center gap-4 p-4 rounded-2xl group transition-all duration-300"
-                style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.borderColor = `${color}35`;
-                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.07)";
-                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)";
-                }}
+                style={{ background: "rgba(255,255,255,0.03)", border: `1px solid ${color}25` }}
               >
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${color}15`, border: `1px solid ${color}30` }}>
                   <Icon className="w-4.5 h-4.5" style={{ color }} strokeWidth={1.75} />

@@ -71,16 +71,7 @@ export default function WhyChooseUs() {
               style={{
                 background: "rgba(255,255,255,0.03)",
                 border: "1px solid rgba(255,255,255,0.07)",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = `${color}35`;
-                (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
-                (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 50px ${color}12`;
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.07)";
-                (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)";
-                (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                boxShadow: `0 10px 24px ${color}10`,
               }}
             >
               {/* Top accent line */}
