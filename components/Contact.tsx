@@ -2,53 +2,27 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, Phone, MapPin, CheckCircle2, Loader2, MessageCircle } from "lucide-react";
-import { fadeUpVariant, staggerContainer } from "@/lib/utils";
-import SectionHeader from "@/components/ui/SectionHeader";
+import { Send, Phone, Mail, MapPin, CheckCircle2, Loader2, MessageCircle } from "lucide-react";
 
 const PHONE = "+994993356909";
 const PHONE_DISPLAY = "+994 99 335 69 09";
 
 const CONTACT_INFO = [
-  {
-    icon: Phone,
-    label: "Zəng Et",
-    value: PHONE_DISPLAY,
-    href: `tel:${PHONE}`,
-    sub: "Birbaşa zəng",
-  },
-  {
-    icon: MessageCircle,
-    label: "WhatsApp",
-    value: PHONE_DISPLAY,
-    href: `https://wa.me/${PHONE}`,
-    sub: "WhatsApp yazın",
-  },
-  {
-    icon: Mail,
-    label: "E-poçt",
-    value: "info@eltek.az",
-    href: "mailto:info@eltek.az",
-    sub: "24 saat ərzində cavab",
-  },
-  {
-    icon: MapPin,
-    label: "Ünvan",
-    value: "Bakı, Azərbaycan",
-    href: "https://maps.google.com/?q=Baku,Azerbaijan",
-    sub: "Ofisimizə gəlin",
-  },
+  { icon: Phone, label: "Zəng Et", value: PHONE_DISPLAY, sub: "Birbaşa zəng", href: `tel:${PHONE}`, color: "#1E6EFF" },
+  { icon: MessageCircle, label: "WhatsApp", value: PHONE_DISPLAY, sub: "Mesaj göndər", href: `https://wa.me/${PHONE}`, color: "#25D366" },
+  { icon: Mail, label: "E-poçt", value: "info@eltek.az", sub: "24 saat ərzində cavab", href: "mailto:info@eltek.az", color: "#C9A84C" },
+  { icon: MapPin, label: "Ünvan", value: "Bakı, Azərbaycan", sub: "Ofisimizə gəlin", href: "#", color: "#8B5CF6" },
 ];
 
 type FormState = { name: string; email: string; company: string; message: string };
-type Status = "idle" | "loading" | "success" | "error";
+type Status = "idle" | "loading" | "success";
 
 export default function Contact() {
   const [form, setForm] = useState<FormState>({ name: "", email: "", company: "", message: "" });
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Partial<FormState>>({});
 
-  const validate = (): boolean => {
+  const validate = () => {
     const errs: Partial<FormState> = {};
     if (!form.name.trim()) errs.name = "Ad tələb olunur";
     if (!form.email.trim()) errs.email = "E-poçt tələb olunur";
@@ -68,172 +42,165 @@ export default function Contact() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-    if (errors[name as keyof FormState]) setErrors((prev) => ({ ...prev, [name]: undefined }));
+    setForm((p) => ({ ...p, [name]: value }));
+    if (errors[name as keyof FormState]) setErrors((p) => ({ ...p, [name]: undefined }));
   };
 
-  const inputClass = (field: keyof FormState) =>
-    `w-full px-4 py-3 rounded-2xl text-sm bg-slate-50 dark:bg-slate-800/60 border transition-all duration-200 outline-none placeholder:text-slate-400 text-slate-900 dark:text-white ${
-      errors[field]
-        ? "border-rose-500/60 focus:border-rose-500 focus:ring-1 focus:ring-rose-500/30"
-        : "border-slate-200 dark:border-slate-700 focus:border-eltek-500 focus:ring-1 focus:ring-eltek-500/30"
-    }`;
+  const inputStyle = (field: keyof FormState) => ({
+    width: "100%",
+    padding: "12px 16px",
+    borderRadius: "12px",
+    fontSize: "14px",
+    background: "rgba(255,255,255,0.04)",
+    border: `1px solid ${errors[field] ? "rgba(239,68,68,0.5)" : "rgba(255,255,255,0.1)"}`,
+    color: "#E8EDF5",
+    outline: "none",
+    transition: "border-color 0.2s",
+    fontFamily: "'DM Sans', sans-serif",
+  });
 
   return (
-    <section
-      id="contact"
-      aria-labelledby="contact-title"
-      className="relative section-padding overflow-hidden"
-    >
-      <div className="absolute -right-40 top-0 w-[500px] h-[500px] rounded-full bg-eltek-500/6 blur-3xl pointer-events-none" aria-hidden="true" />
-      <div className="absolute grid-bg inset-0 opacity-40" aria-hidden="true" />
+    <section id="contact" className="relative section overflow-hidden" style={{ background: "var(--navy)" }}>
+      <div className="grid-pattern absolute inset-0 opacity-40" aria-hidden="true" />
+      <div
+        className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%)" }}
+        aria-hidden="true"
+      />
 
       <div className="relative max-w-7xl mx-auto">
-        <div className="flex justify-center mb-16">
-          <SectionHeader
-            eyebrow="Əlaqə"
-            title="Rəqəmsal Transformasiyanıza"
-            titleHighlight="Başlayın"
-            description="Layihəniz və ya problemlər haqqında danışın — mütəxəssislərimiz 1 iş günü ərzində sizinlə əlaqə saxlayacaq."
-          />
+        {/* Header */}
+        <div className="text-center mb-16">
+          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-xs font-medium tracking-widest uppercase" style={{ color: "#C9A84C" }}>
+            — Əlaqə
+          </motion.span>
+          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="font-display font-bold text-4xl md:text-5xl mt-4 leading-tight" style={{ color: "#E8EDF5" }}>
+            Rəqəmsal Transformasiyanıza<br />
+            <span className="gold-text">Başlayın</span>
+          </motion.h2>
         </div>
 
         <div className="grid lg:grid-cols-5 gap-10 items-start">
-          {/* Əlaqə məlumatları */}
+          {/* Contact info */}
           <motion.div
-            className="lg:col-span-2 flex flex-col gap-5"
-            variants={staggerContainer(0.12)}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-2 flex flex-col gap-4"
           >
-            <motion.p variants={fadeUpVariant} className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed mb-2" style={{ color: "rgba(232,237,245,0.55)" }}>
               Sürətli konsultasiyadan tam miqyaslı transformasiyaya qədər — ElTek hər addımda yanınızdadır.
-            </motion.p>
+            </p>
 
-            {CONTACT_INFO.map(({ icon: Icon, label, value, href, sub }) => (
+            {CONTACT_INFO.map(({ icon: Icon, label, value, sub, href, color }) => (
               <motion.a
                 key={label}
                 href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}
                 rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                variants={fadeUpVariant}
-                whileHover={{ x: 4 }}
+                whileHover={{ x: 6 }}
                 transition={{ type: "spring", stiffness: 400 }}
-                className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-eltek-500/40 hover:shadow-glow-sm transition-all duration-300 group"
+                className="flex items-center gap-4 p-4 rounded-2xl group transition-all duration-300"
+                style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = `${color}35`;
+                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.07)";
+                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)";
+                }}
               >
-                <div className="w-10 h-10 rounded-xl bg-eltek-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-eltek-500/20 transition-colors">
-                  <Icon className="w-5 h-5 text-eltek-500" strokeWidth={1.75} />
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${color}15`, border: `1px solid ${color}30` }}>
+                  <Icon className="w-4.5 h-4.5" style={{ color }} strokeWidth={1.75} />
                 </div>
                 <div>
-                  <p className="text-xs text-slate-400 font-medium">{label}</p>
-                  <p className="text-sm text-slate-900 dark:text-white font-semibold mt-0.5">{value}</p>
-                  <p className="text-xs text-slate-400 mt-0.5">{sub}</p>
+                  <p className="text-xs font-medium" style={{ color: "rgba(232,237,245,0.45)" }}>{label}</p>
+                  <p className="text-sm font-semibold mt-0.5" style={{ color: "#E8EDF5" }}>{value}</p>
+                  <p className="text-xs mt-0.5" style={{ color: "rgba(232,237,245,0.4)" }}>{sub}</p>
                 </div>
               </motion.a>
             ))}
 
-            {/* Mövcudluq nişanı */}
-            <motion.div
-              variants={fadeUpVariant}
-              className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20"
-            >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <p className="text-xs text-emerald-700 dark:text-emerald-400 font-medium">
-                Hazırda yeni layihələr qəbul edirik
-              </p>
-            </motion.div>
+            {/* Status badge */}
+            <div className="flex items-center gap-2 px-4 py-3 rounded-2xl" style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.2)" }}>
+              <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: "#10B981" }} />
+              <p className="text-xs font-medium" style={{ color: "#10B981" }}>Hazırda yeni layihələr qəbul edirik</p>
+            </div>
           </motion.div>
 
-          {/* Forma */}
+          {/* Form */}
           <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
             className="lg:col-span-3"
-            variants={fadeUpVariant}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
           >
-            <div className="relative p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm">
+            <div className="p-8 rounded-3xl" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
               {status === "success" ? (
                 <motion.div
-                  className="flex flex-col items-center justify-center gap-4 py-12 text-center"
-                  initial={{ opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4 }}
+                  className="flex flex-col items-center justify-center gap-4 py-12 text-center"
                 >
-                  <div className="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center">
-                    <CheckCircle2 className="w-8 h-8 text-emerald-500" />
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.3)" }}>
+                    <CheckCircle2 className="w-8 h-8" style={{ color: "#10B981" }} />
                   </div>
                   <div>
-                    <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white">Mesaj Göndərildi!</h3>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm mt-2 max-w-xs">
-                      Müraciətiniz üçün təşəkkür edirik. Komandamız 1 iş günü ərzində sizinlə əlaqə saxlayacaq.
-                    </p>
+                    <h3 className="font-display font-bold text-xl" style={{ color: "#E8EDF5" }}>Mesaj Göndərildi!</h3>
+                    <p className="text-sm mt-2" style={{ color: "rgba(232,237,245,0.55)" }}>Komandamız 1 iş günü ərzində sizinlə əlaqə saxlayacaq.</p>
                   </div>
-                  <button
-                    onClick={() => { setStatus("idle"); setForm({ name: "", email: "", company: "", message: "" }); }}
-                    className="mt-2 text-xs text-eltek-500 hover:underline"
-                  >
+                  <button onClick={() => { setStatus("idle"); setForm({ name: "", email: "", company: "", message: "" }); }} className="text-xs mt-2" style={{ color: "#C9A84C" }}>
                     Yeni mesaj göndər
                   </button>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} noValidate aria-label="Əlaqə forması">
+                <form onSubmit={handleSubmit} noValidate>
                   <div className="grid sm:grid-cols-2 gap-4 mb-4">
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="name" className="text-xs font-semibold text-slate-600 dark:text-slate-300">
-                        Ad Soyad <span className="text-rose-500">*</span>
-                      </label>
-                      <input id="name" name="name" type="text" value={form.name} onChange={handleChange}
-                        placeholder="Elçin Əliyev" autoComplete="name" aria-required="true" aria-invalid={!!errors.name}
-                        className={inputClass("name")} />
-                      {errors.name && <p className="text-xs text-rose-500" role="alert">{errors.name}</p>}
+                      <label className="text-xs font-medium" style={{ color: "rgba(232,237,245,0.5)" }}>Ad Soyad <span style={{ color: "#ef4444" }}>*</span></label>
+                      <input name="name" type="text" value={form.name} onChange={handleChange} placeholder="Elçin Əliyev" style={inputStyle("name")}
+                        onFocus={(e) => { (e.target as HTMLInputElement).style.borderColor = "#C9A84C"; }}
+                        onBlur={(e) => { (e.target as HTMLInputElement).style.borderColor = errors.name ? "rgba(239,68,68,0.5)" : "rgba(255,255,255,0.1)"; }}
+                      />
+                      {errors.name && <p className="text-xs" style={{ color: "#ef4444" }}>{errors.name}</p>}
                     </div>
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="email" className="text-xs font-semibold text-slate-600 dark:text-slate-300">
-                        E-poçt <span className="text-rose-500">*</span>
-                      </label>
-                      <input id="email" name="email" type="email" value={form.email} onChange={handleChange}
-                        placeholder="elcin@sirket.az" autoComplete="email" aria-required="true" aria-invalid={!!errors.email}
-                        className={inputClass("email")} />
-                      {errors.email && <p className="text-xs text-rose-500" role="alert">{errors.email}</p>}
+                      <label className="text-xs font-medium" style={{ color: "rgba(232,237,245,0.5)" }}>E-poçt <span style={{ color: "#ef4444" }}>*</span></label>
+                      <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="elcin@sirket.az" style={inputStyle("email")}
+                        onFocus={(e) => { (e.target as HTMLInputElement).style.borderColor = "#C9A84C"; }}
+                        onBlur={(e) => { (e.target as HTMLInputElement).style.borderColor = errors.email ? "rgba(239,68,68,0.5)" : "rgba(255,255,255,0.1)"; }}
+                      />
+                      {errors.email && <p className="text-xs" style={{ color: "#ef4444" }}>{errors.email}</p>}
                     </div>
                   </div>
 
                   <div className="flex flex-col gap-1.5 mb-4">
-                    <label htmlFor="company" className="text-xs font-semibold text-slate-600 dark:text-slate-300">
-                      Şirkət <span className="text-slate-400 font-normal">(ixtiyari)</span>
-                    </label>
-                    <input id="company" name="company" type="text" value={form.company} onChange={handleChange}
-                      placeholder="Şirkət MMC" autoComplete="organization" className={inputClass("company")} />
+                    <label className="text-xs font-medium" style={{ color: "rgba(232,237,245,0.5)" }}>Şirkət <span style={{ color: "rgba(232,237,245,0.35)" }}>(ixtiyari)</span></label>
+                    <input name="company" type="text" value={form.company} onChange={handleChange} placeholder="Şirkət MMC" style={inputStyle("company")}
+                      onFocus={(e) => { (e.target as HTMLInputElement).style.borderColor = "#C9A84C"; }}
+                      onBlur={(e) => { (e.target as HTMLInputElement).style.borderColor = "rgba(255,255,255,0.1)"; }}
+                    />
                   </div>
 
                   <div className="flex flex-col gap-1.5 mb-6">
-                    <label htmlFor="message" className="text-xs font-semibold text-slate-600 dark:text-slate-300">
-                      Mesaj <span className="text-rose-500">*</span>
-                    </label>
-                    <textarea id="message" name="message" rows={5} value={form.message} onChange={handleChange}
+                    <label className="text-xs font-medium" style={{ color: "rgba(232,237,245,0.5)" }}>Mesaj <span style={{ color: "#ef4444" }}>*</span></label>
+                    <textarea name="message" rows={5} value={form.message} onChange={handleChange}
                       placeholder="Layihəniz, hədəfləriniz və ya problemlər haqqında yazın…"
-                      aria-required="true" aria-invalid={!!errors.message}
-                      className={`${inputClass("message")} resize-none`} />
-                    {errors.message && <p className="text-xs text-rose-500" role="alert">{errors.message}</p>}
+                      style={{ ...inputStyle("message"), resize: "none" }}
+                      onFocus={(e) => { (e.target as HTMLTextAreaElement).style.borderColor = "#C9A84C"; }}
+                      onBlur={(e) => { (e.target as HTMLTextAreaElement).style.borderColor = errors.message ? "rgba(239,68,68,0.5)" : "rgba(255,255,255,0.1)"; }}
+                    />
+                    {errors.message && <p className="text-xs" style={{ color: "#ef4444" }}>{errors.message}</p>}
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={status === "loading"}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl font-display font-semibold text-sm text-white bg-eltek-500 hover:bg-eltek-600 shadow-glow-sm hover:shadow-glow transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
-                  >
-                    {status === "loading" ? (
-                      <><Loader2 className="w-4 h-4 animate-spin" />Göndərilir…</>
-                    ) : (
-                      <>Mesaj Göndər<Send className="w-4 h-4" /></>
-                    )}
+                  <button type="submit" disabled={status === "loading"} className="btn-gold w-full justify-center disabled:opacity-50 disabled:cursor-not-allowed">
+                    {status === "loading" ? <><Loader2 className="w-4 h-4 animate-spin" />Göndərilir…</> : <>Mesaj Göndər <Send className="w-4 h-4" /></>}
                   </button>
 
-                  <p className="mt-4 text-center text-xs text-slate-400">
-                    Məxfiliyinizə hörmət edirik. Spam yoxdur.
-                  </p>
+                  <p className="mt-4 text-center text-xs" style={{ color: "rgba(232,237,245,0.35)" }}>Məxfiliyinizə hörmət edirik. Spam yoxdur.</p>
                 </form>
               )}
             </div>

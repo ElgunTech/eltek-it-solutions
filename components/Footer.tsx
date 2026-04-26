@@ -1,43 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Zap, ArrowUpRight } from "lucide-react";
-import { fadeUpVariant, staggerContainer } from "@/lib/utils";
+import { ArrowUpRight, Phone, Mail, MapPin } from "lucide-react";
 
 const PHONE = "+994993356909";
 const PHONE_DISPLAY = "+994 99 335 69 09";
 
-const NAV_COLUMNS = [
-  {
-    title: "Xidmətlər",
-    links: [
-      { label: "IT Konsaltinq", href: "#services" },
-      { label: "Şəbəkə Həlləri", href: "#services" },
-      { label: "Kibertəhlükəsizlik", href: "#services" },
-      { label: "Proqram Təminatı", href: "#services" },
-    ],
-  },
-  {
-    title: "Şirkət",
-    links: [
-      { label: "Haqqımızda", href: "#about" },
-      { label: "Niyə ElTek?", href: "#why-us" },
-      { label: "Karyera", href: "#" },
-      { label: "Blog", href: "#" },
-    ],
-  },
-  {
-    title: "Əlaqə",
-    links: [
-      { label: PHONE_DISPLAY, href: `tel:${PHONE}` },
-      { label: "WhatsApp", href: `https://wa.me/${PHONE}` },
-      { label: "info@eltek.az", href: "mailto:info@eltek.az" },
-      { label: "Bakı, Azərbaycan", href: "#" },
-    ],
-  },
-];
-
-// Instagram SVG ikonu
 function InstagramIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -46,7 +14,6 @@ function InstagramIcon({ className }: { className?: string }) {
   );
 }
 
-// LinkedIn SVG ikonu
 function LinkedInIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -55,7 +22,6 @@ function LinkedInIcon({ className }: { className?: string }) {
   );
 }
 
-// WhatsApp SVG ikonu
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -64,61 +30,67 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-const SOCIALS = [
-  {
-    icon: InstagramIcon,
-    label: "Instagram",
-    href: "https://www.instagram.com/eltek__az/",
-  },
-  {
-    icon: LinkedInIcon,
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/company/eltek-technology/",
-  },
-  {
-    icon: WhatsAppIcon,
-    label: "WhatsApp",
-    href: `https://wa.me/${PHONE}`,
-  },
+const NAV = [
+  { title: "Xidmətlər", links: [{ l: "IT Konsaltinq", h: "#services" }, { l: "Şəbəkə Həlləri", h: "#services" }, { l: "Kibertəhlükəsizlik", h: "#services" }, { l: "Proqram Təminatı", h: "#services" }] },
+  { title: "Şirkət", links: [{ l: "Haqqımızda", h: "#about" }, { l: "Niyə ElTek?", h: "#why-us" }, { l: "Karyera", h: "#" }, { l: "Blog", h: "#" }] },
 ];
 
-const CERTIFICATIONS = ["ISO 27001", "GDPR Uyğun", "Microsoft Tərəfdaş", "7/24 Dəstək"];
+const SOCIALS = [
+  { icon: InstagramIcon, label: "Instagram", href: "https://www.instagram.com/eltek__az/" },
+  { icon: LinkedInIcon, label: "LinkedIn", href: "https://www.linkedin.com/company/eltek-technology/" },
+  { icon: WhatsAppIcon, label: "WhatsApp", href: `https://wa.me/${PHONE}` },
+];
 
 export default function Footer() {
-  const year = new Date().getFullYear();
-
   return (
-    <footer className="relative bg-slate-950 dark:bg-black text-white overflow-hidden" role="contentinfo">
-      {/* Üst parıltı xətti */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[2px] bg-gradient-to-r from-transparent via-eltek-500/60 to-transparent pointer-events-none" aria-hidden="true" />
-      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[200px] rounded-full bg-eltek-500/5 blur-3xl pointer-events-none" aria-hidden="true" />
+    <footer className="relative overflow-hidden" style={{ background: "var(--navy-2)", borderTop: "1px solid rgba(201,168,76,0.12)" }}>
+      {/* Top glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[2px] pointer-events-none" style={{ background: "linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent)" }} aria-hidden="true" />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-6 md:px-8">
         <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 py-16 border-b border-slate-800"
-          variants={staggerContainer(0.08)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 py-16"
+          style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
         >
-          {/* Brend sütunu */}
-          <motion.div variants={fadeUpVariant} className="lg:col-span-2 flex flex-col gap-5">
-            <a href="#" className="flex items-center gap-2.5 group w-fit" aria-label="ElTek ana səhifə">
-              <div className="w-9 h-9 rounded-xl bg-eltek-500 flex items-center justify-center shadow-glow-sm group-hover:shadow-glow transition-shadow">
-                <Zap className="w-5 h-5 text-white" strokeWidth={2.5} />
-              </div>
-              <span className="font-display font-bold text-xl">
-                El<span className="text-eltek-400">Tek</span>
-              </span>
+          {/* Brand */}
+          <div className="lg:col-span-2 flex flex-col gap-6">
+            <a href="#" className="flex items-center w-fit">
+              <img
+                src="https://www.eltekdataloggers.co.uk/cdn/shop/files/eltek.png?v=1769206426&width=1500"
+                alt="ElTek"
+                className="h-8 w-auto"
+                style={{ filter: "brightness(0) invert(1)" }}
+              />
             </a>
 
-            <p className="text-sm text-slate-400 leading-relaxed max-w-xs">
-              Azərbaycanın aparıcı IT şirkəti. Müəssisələri müasir texnologiyalarla gücləndiririk —
-              kibertəhlükəsizlikdən fərdi proqram həllərinə qədər.
+            <p className="text-sm leading-relaxed max-w-xs" style={{ color: "rgba(232,237,245,0.5)" }}>
+              Azərbaycanın aparıcı IT şirkəti. Müəssisələri müasir texnologiyalarla gücləndirir,
+              rəqəmsal transformasiyanı sürətləndirir.
             </p>
 
-            {/* Sosial şəbəkələr */}
-            <div className="flex items-center gap-2" role="list" aria-label="Sosial şəbəkə linkləri">
+            {/* Contact quick links */}
+            <div className="flex flex-col gap-2">
+              {[
+                { icon: Phone, text: PHONE_DISPLAY, href: `tel:${PHONE}` },
+                { icon: Mail, text: "info@eltek.az", href: "mailto:info@eltek.az" },
+                { icon: MapPin, text: "Bakı, Azərbaycan", href: "#" },
+              ].map(({ icon: Icon, text, href }) => (
+                <a key={text} href={href} className="flex items-center gap-2 text-sm transition-colors duration-200" style={{ color: "rgba(232,237,245,0.5)" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#C9A84C"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(232,237,245,0.5)"; }}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                  {text}
+                </a>
+              ))}
+            </div>
+
+            {/* Socials */}
+            <div className="flex items-center gap-2">
               {SOCIALS.map(({ icon: Icon, label, href }) => (
                 <a
                   key={label}
@@ -126,55 +98,50 @@ export default function Footer() {
                   aria-label={label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  role="listitem"
-                  className="w-9 h-9 rounded-xl flex items-center justify-center text-slate-500 hover:text-white bg-slate-900 hover:bg-eltek-500 border border-slate-800 hover:border-eltek-500 transition-all duration-200"
+                  className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200"
+                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(232,237,245,0.5)" }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.background = "rgba(201,168,76,0.15)";
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(201,168,76,0.4)";
+                    (e.currentTarget as HTMLElement).style.color = "#C9A84C";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)";
+                    (e.currentTarget as HTMLElement).style.color = "rgba(232,237,245,0.5)";
+                  }}
                 >
                   <Icon className="w-4 h-4" />
                 </a>
               ))}
             </div>
+          </div>
 
-            {/* Sertifikatlar */}
-            <div className="flex flex-wrap gap-2">
-              {CERTIFICATIONS.map((cert) => (
-                <span key={cert} className="px-2.5 py-1 rounded-full text-[10px] font-mono font-medium text-slate-400 border border-slate-700 bg-slate-900/50">
-                  {cert}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Nav sütunları */}
-          {NAV_COLUMNS.map((col) => (
-            <motion.div key={col.title} variants={fadeUpVariant}>
-              <h3 className="text-xs font-semibold tracking-widest uppercase text-slate-500 mb-4">
-                {col.title}
-              </h3>
-              <ul className="flex flex-col gap-3" role="list">
-                {col.links.map(({ label, href }) => (
-                  <li key={label}>
-                    <a
-                      href={href}
-                      target={href.startsWith("http") ? "_blank" : undefined}
-                      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="group flex items-center gap-1 text-sm text-slate-400 hover:text-white transition-colors duration-150"
+          {/* Nav columns */}
+          {NAV.map((col) => (
+            <div key={col.title}>
+              <h3 className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "rgba(232,237,245,0.35)" }}>{col.title}</h3>
+              <ul className="flex flex-col gap-3">
+                {col.links.map(({ l, h }) => (
+                  <li key={l}>
+                    <a href={h} className="group flex items-center gap-1 text-sm transition-colors duration-150" style={{ color: "rgba(232,237,245,0.5)" }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#C9A84C"; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(232,237,245,0.5)"; }}
                     >
-                      {label}
+                      {l}
                       <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </a>
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           ))}
         </motion.div>
 
-        {/* Alt xətt */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-6 text-xs text-slate-500">
-          <p>© {year} ElTek IT Solutions. Bütün hüquqlar qorunur.</p>
-          <p>
-            Bakı, Azərbaycan ilə <span className="text-eltek-400 font-semibold">qürur</span> hissi ilə hazırlanmışdır
-          </p>
+        {/* Bottom */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-6 text-xs" style={{ color: "rgba(232,237,245,0.3)" }}>
+          <p>© {new Date().getFullYear()} ElTek IT Solutions. Bütün hüquqlar qorunur.</p>
+          <p>Bakı, Azərbaycan — <span style={{ color: "#C9A84C" }}>eltek.az</span></p>
         </div>
       </div>
     </footer>

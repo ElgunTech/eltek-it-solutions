@@ -2,137 +2,130 @@
 
 import { motion } from "framer-motion";
 import { Zap, ShieldCheck, Clock, TrendingUp, Headphones, CheckCircle2 } from "lucide-react";
-import { fadeUpVariant, staggerContainer } from "@/lib/utils";
-import SectionHeader from "@/components/ui/SectionHeader";
 
 const ADVANTAGES = [
-  {
-    icon: Zap,
-    title: "Sürətli Çatdırılma",
-    description: "Çevik metodologiyalar və sınaqdan keçmiş proseslər sayəsində keyfiyyətdən ödün vermədən vaxtında çatdırılma.",
-    color: "amber",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Təhlükəsizlik Prioritetdir",
-    description: "Qurduğumuz hər həll ISO 27001 standartlarına uyğundur. Təhlükəsizlik heç vaxt əlavə düşünülmür — arxitekturanın özündədir.",
-    color: "emerald",
-  },
-  {
-    icon: Clock,
-    title: "99.9% Uptime Zəmanəti",
-    description: "Proaktiv monitorinq və ehtiyatlı infrastruktur — sistemləriniz ən vacib anlarda işlək qalır.",
-    color: "blue",
-  },
-  {
-    icon: TrendingUp,
-    title: "Genişlənə Bilən Dizayn",
-    description: "Startapdan korporasiyaya qədər böyüyən həllər qururuq — bahalı yenidən yazma və ya miqrasiya olmadan.",
-    color: "purple",
-  },
-  {
-    icon: Headphones,
-    title: "Fərdi Dəstək Komandası",
-    description: "Şəxsi hesab menecerləri və 7/24 texniki dəstək — ehtiyac duyanda həmişə yanınızdayıq.",
-    color: "cyan",
-  },
-  {
-    icon: CheckCircle2,
-    title: "Şəffaf Tərəfdaşlıq",
-    description: "Aydın müqavilələr, dürüst qiymətlər, mütəmadi hesabatlar. Layihənizin gedişatını həmişə bilirsiniz.",
-    color: "rose",
-  },
+  { icon: Zap, title: "Sürətli Çatdırılma", description: "Çevik metodologiyalar ilə keyfiyyətdən ödün vermədən vaxtında çatdırılma.", color: "#F59E0B" },
+  { icon: ShieldCheck, title: "Təhlükəsizlik Prioritetdir", description: "ISO 27001 standartlarına uyğun həllər. Təhlükəsizlik arxitekturanın özündədir.", color: "#10B981" },
+  { icon: Clock, title: "99.9% Uptime Zəmanəti", description: "Proaktiv monitorinq və ehtiyatlı infrastruktur — sistemlər həmişə işlək qalır.", color: "#1E6EFF" },
+  { icon: TrendingUp, title: "Genişlənə Bilən Dizayn", description: "Startapdan korporasiyaya böyüyən həllər — bahalı yenidən yazma olmadan.", color: "#8B5CF6" },
+  { icon: Headphones, title: "Fərdi Dəstək Komandası", description: "Şəxsi hesab menecerləri və 7/24 texniki dəstək — həmişə yanınızdayıq.", color: "#06B6D4" },
+  { icon: CheckCircle2, title: "Şəffaf Tərəfdaşlıq", description: "Aydın müqavilələr, dürüst qiymətlər — layihənizin gedişatını həmişə bilirsiniz.", color: "#C9A84C" },
 ];
-
-const colorMap: Record<string, { bg: string; icon: string; border: string }> = {
-  amber:   { bg: "bg-amber-500/10",   icon: "text-amber-500",   border: "border-amber-500/20" },
-  emerald: { bg: "bg-emerald-500/10", icon: "text-emerald-500", border: "border-emerald-500/20" },
-  blue:    { bg: "bg-eltek-500/10",   icon: "text-eltek-500",   border: "border-eltek-500/20" },
-  purple:  { bg: "bg-purple-500/10",  icon: "text-purple-500",  border: "border-purple-500/20" },
-  cyan:    { bg: "bg-cyan-500/10",    icon: "text-cyan-500",    border: "border-cyan-500/20" },
-  rose:    { bg: "bg-rose-500/10",    icon: "text-rose-500",    border: "border-rose-500/20" },
-};
-
-function AdvantageCard({ advantage, index }: { advantage: (typeof ADVANTAGES)[0]; index: number }) {
-  const Icon = advantage.icon;
-  const colors = colorMap[advantage.color];
-  return (
-    <motion.article
-      variants={fadeUpVariant}
-      custom={index}
-      whileHover={{ y: -4 }}
-      transition={{ type: "spring", stiffness: 350, damping: 28 }}
-      className="group flex flex-col gap-4 p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:shadow-glow-sm hover:border-eltek-500/30 transition-all duration-300"
-    >
-      <div className={`w-11 h-11 rounded-2xl ${colors.bg} border ${colors.border} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-        <Icon className={`w-5 h-5 ${colors.icon}`} strokeWidth={1.75} />
-      </div>
-      <div className="flex flex-col gap-1.5">
-        <h3 className="font-display font-semibold text-base text-slate-900 dark:text-white">{advantage.title}</h3>
-        <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{advantage.description}</p>
-      </div>
-    </motion.article>
-  );
-}
 
 export default function WhyChooseUs() {
   return (
-    <section
-      id="why-us"
-      aria-labelledby="why-us-title"
-      className="relative section-padding bg-slate-50/50 dark:bg-slate-900/40 overflow-hidden"
-    >
-      <div className="absolute left-0 bottom-0 w-[600px] h-[400px] rounded-full bg-eltek-500/5 blur-3xl pointer-events-none" aria-hidden="true" />
+    <section id="why-us" className="relative section overflow-hidden" style={{ background: "var(--navy-2)" }}>
+      {/* Background accent */}
+      <div
+        className="absolute left-0 bottom-0 w-[400px] h-[400px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(30,110,255,0.06) 0%, transparent 70%)" }}
+        aria-hidden="true"
+      />
 
       <div className="relative max-w-7xl mx-auto">
-        <div className="flex justify-center mb-16">
-          <SectionHeader
-            eyebrow="Niyə ElTek?"
-            title="Doğru Tərəfdaşı"
-            titleHighlight="Seçməyin Üstünlükləri"
-            description="Yüzlərlə şirkət ElTek-ə inanır, çünki texniki dərinliyi həqiqi tərəfdaşlıqla birləşdiririk — real fərq yaradan nadir kombinasiya."
-          />
+        {/* Header */}
+        <div className="text-center mb-16">
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-xs font-medium tracking-widest uppercase"
+            style={{ color: "#C9A84C" }}
+          >
+            — Niyə ElTek?
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="font-display font-bold text-4xl md:text-5xl mt-4 leading-tight"
+            style={{ color: "#E8EDF5" }}
+          >
+            Doğru Tərəfdaşı<br />
+            <span className="gold-text">Seçməyin Üstünlükləri</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-base mt-4 max-w-xl mx-auto"
+            style={{ color: "rgba(232,237,245,0.55)" }}
+          >
+            Texniki dərinliyi həqiqi tərəfdaşlıqla birləşdiririk — real fərq yaradan kombinasiya.
+          </motion.p>
         </div>
 
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
-          variants={staggerContainer(0.09)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-        >
-          {ADVANTAGES.map((adv, i) => (
-            <AdvantageCard key={adv.title} advantage={adv} index={i} />
-          ))}
-        </motion.div>
+        {/* Cards grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
+          {ADVANTAGES.map(({ icon: Icon, title, description, color }, i) => (
+            <motion.article
+              key={title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.55, delay: i * 0.09 }}
+              whileHover={{ y: -6 }}
+              className="group relative p-6 rounded-2xl transition-all duration-300"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.07)",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = `${color}35`;
+                (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
+                (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 50px ${color}12`;
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.07)";
+                (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)";
+                (e.currentTarget as HTMLElement).style.boxShadow = "none";
+              }}
+            >
+              {/* Top accent line */}
+              <div className="absolute top-0 left-6 right-6 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: `linear-gradient(90deg, transparent, ${color}, transparent)` }} />
 
-        {/* CTA bölməsi */}
+              <div
+                className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+                style={{ background: `${color}15`, border: `1px solid ${color}30` }}
+              >
+                <Icon className="w-5 h-5" style={{ color }} strokeWidth={1.75} />
+              </div>
+
+              <h3 className="font-display font-semibold text-base mb-2" style={{ color: "#E8EDF5" }}>{title}</h3>
+              <p className="text-sm leading-relaxed" style={{ color: "rgba(232,237,245,0.55)" }}>{description}</p>
+            </motion.article>
+          ))}
+        </div>
+
+        {/* CTA strip with image */}
         <motion.div
-          className="mt-16 relative rounded-3xl overflow-hidden"
-          variants={fadeUpVariant}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="relative rounded-3xl overflow-hidden"
         >
           <img
-            src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&auto=format&fit=crop"
-            alt="Müasir ofis mühiti"
-            className="w-full h-56 object-cover"
+            src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80&auto=format&fit=crop"
+            alt="Müasir ofis"
+            className="w-full h-64 object-cover"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-eltek-900/90 via-eltek-800/80 to-eltek-700/70 flex flex-col sm:flex-row items-center justify-between gap-6 p-8">
-            <div className="text-center sm:text-left">
-              <h3 className="font-display font-bold text-xl text-white">
+          <div
+            className="absolute inset-0 flex flex-col md:flex-row items-center justify-between gap-6 p-8 md:p-12"
+            style={{ background: "linear-gradient(135deg, rgba(5,13,26,0.92) 0%, rgba(5,13,26,0.7) 100%)" }}
+          >
+            <div className="text-center md:text-left">
+              <h3 className="font-display font-bold text-2xl md:text-3xl" style={{ color: "#E8EDF5" }}>
                 IT infrastrukturunuzu modernləşdirməyə hazırsınız?
               </h3>
-              <p className="text-eltek-200 text-sm mt-1">
+              <p className="mt-2 text-sm" style={{ color: "rgba(232,237,245,0.6)" }}>
                 Pulsuz 30 dəqiqəlik strategiya sessiyasında hədəflərinizi müzakirə edək.
               </p>
             </div>
-            <a
-              href="#contact"
-              className="flex-shrink-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl font-display font-semibold text-sm text-eltek-600 bg-white hover:bg-eltek-50 shadow-sm transition-all duration-200 active:scale-[0.97]"
-            >
+            <a href="#contact" className="btn-gold flex-shrink-0 whitespace-nowrap">
               Pulsuz Konsultasiya Al
             </a>
           </div>

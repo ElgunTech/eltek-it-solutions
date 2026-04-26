@@ -1,128 +1,73 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Target, Eye, Users, Award } from "lucide-react";
-import { fadeUpVariant, staggerContainer } from "@/lib/utils";
-import SectionHeader from "@/components/ui/SectionHeader";
-
-const PILLARS = [
-  {
-    icon: Target,
-    label: "Missiyamız",
-    text: "Hər ölçüdə olan təşkilatları etibarlı, innovativ və təhlükəsiz texnoloji həllərlə gücləndirmək — ölçülə bilən nəticələr və davamlı inkişaf üçün.",
-  },
-  {
-    icon: Eye,
-    label: "Vizyonumuz",
-    text: "Bölgənin ən etibarlı texnologiya tərəfdaşı olmaq — mühəndislik mükəmməlliyi ilə insan mərkəzli dizaynın birləşdiyi, daha yaxşı rəqəmsal gələcəyi şəkilləndirən şirkət.",
-  },
-];
+import { Target, Eye, CheckCircle } from "lucide-react";
 
 const STATS = [
-  { icon: Users, value: "200+", label: "Korporativ Müştəri" },
-  { icon: Award, value: "98%", label: "Müştəri Məmnuniyyəti" },
-  { icon: Users, value: "50+", label: "Sertifikatlı Mütəxəssis" },
-  { icon: Award, value: "10+", label: "İllik Təcrübə" },
+  { value: "200+", label: "Korporativ Müştəri" },
+  { value: "98%", label: "Məmnuniyyət Faizi" },
+  { value: "50+", label: "Sertifikatlı Mütəxəssis" },
+  { value: "10+", label: "İllik Təcrübə" },
+];
+
+const VALUES = [
+  "Müştəri mərkəzli yanaşma",
+  "Şəffaf ünsiyyət",
+  "Texniki üstünlük",
+  "Vaxtında çatdırılma",
+  "Davamlı dəstək",
+  "Innovativ həllər",
 ];
 
 export default function About() {
   return (
-    <section
-      id="about"
-      aria-labelledby="about-title"
-      className="relative section-padding overflow-hidden"
-    >
-      <div className="absolute right-0 top-0 w-[500px] h-[500px] rounded-full bg-eltek-500/5 blur-3xl pointer-events-none" aria-hidden="true" />
+    <section id="about" className="relative section overflow-hidden" style={{ background: "var(--navy)" }}>
+      {/* Decorative */}
+      <div
+        className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%)" }}
+        aria-hidden="true"
+      />
 
       <div className="relative max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Sol – mətn */}
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+          {/* Left – visuals */}
           <motion.div
-            className="flex flex-col gap-10"
-            variants={staggerContainer(0.12)}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="relative"
           >
-            <SectionHeader
-              eyebrow="Haqqımızda"
-              title="Etibar üzərində qurulmuş,"
-              titleHighlight="İnnovasiya ilə idarə olunan"
-              description="ElTek müasir bizneslərin texnoloji problemlərini həll etmək üçün yaradılmış Azərbaycanın aparıcı IT şirkətidir. Bizi seçən müəssisələr yalnız texniki xidmət deyil, etibarlı bir tərəfdaş qazanır."
-              align="left"
-            />
-
-            {/* Missiya/Vizyon kartları */}
-            <div className="flex flex-col gap-4">
-              {PILLARS.map(({ icon: Icon, label, text }) => (
-                <motion.div
-                  key={label}
-                  variants={fadeUpVariant}
-                  className="flex gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-eltek-500/30 transition-colors duration-300"
-                >
-                  <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-eltek-500/10 flex items-center justify-center mt-0.5">
-                    <Icon className="w-5 h-5 text-eltek-500" strokeWidth={1.75} />
-                  </div>
-                  <div>
-                    <h3 className="font-display font-semibold text-sm text-slate-900 dark:text-white mb-1">{label}</h3>
-                    <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{text}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Şəkil */}
-            <motion.div variants={fadeUpVariant} className="relative rounded-3xl overflow-hidden h-52">
+            {/* Main image */}
+            <div className="relative rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(201,168,76,0.15)" }}>
               <img
                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&auto=format&fit=crop"
-                alt="ElTek komandası işdə"
-                className="w-full h-full object-cover"
+                alt="ElTek komandası"
+                className="w-full h-80 object-cover"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-eltek-900/60 to-transparent flex items-end p-6">
-                <div>
-                  <p className="text-white font-display font-bold text-lg">Peşəkar Komandamız</p>
-                  <p className="text-eltek-200 text-sm mt-1">Mühəndislər, arxitektlər və təhlükəsizlik analitikləri</p>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
+              <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(5,13,26,0.6) 0%, transparent 60%)" }} />
 
-          {/* Sağ – statistikalar */}
-          <motion.div
-            className="grid grid-cols-2 gap-4"
-            variants={staggerContainer(0.08)}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-          >
-            {STATS.map(({ icon: Icon, value, label }, i) => (
-              <motion.div
-                key={label}
-                variants={fadeUpVariant}
-                custom={i}
-                whileHover={{ scale: 1.03 }}
-                transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                className={`flex flex-col gap-3 p-6 rounded-3xl border transition-all duration-300
-                  ${i === 0
-                    ? "bg-eltek-500 border-transparent text-white shadow-glow"
-                    : "bg-white dark:bg-slate-900 border-slate-200/80 dark:border-slate-800 hover:border-eltek-500/40 hover:shadow-glow-sm"
-                  }`}
+              {/* Overlay badge */}
+              <div
+                className="absolute bottom-6 left-6 px-5 py-4 rounded-xl"
+                style={{ background: "rgba(5,13,26,0.9)", border: "1px solid rgba(201,168,76,0.2)", backdropFilter: "blur(12px)" }}
               >
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${i === 0 ? "bg-white/20" : "bg-eltek-500/10"}`}>
-                  <Icon className={`w-5 h-5 ${i === 0 ? "text-white" : "text-eltek-500"}`} strokeWidth={1.75} />
-                </div>
-                <div>
-                  <p className={`font-display font-bold text-3xl leading-none ${i === 0 ? "text-white" : "text-slate-900 dark:text-white"}`}>{value}</p>
-                  <p className={`text-sm mt-1 ${i === 0 ? "text-eltek-100" : "text-slate-500 dark:text-slate-400"}`}>{label}</p>
-                </div>
-              </motion.div>
-            ))}
+                <p className="font-display font-bold text-2xl gold-text">10+ İl</p>
+                <p className="text-xs mt-1" style={{ color: "rgba(232,237,245,0.6)" }}>Azərbaycanda IT Liderliyi</p>
+              </div>
+            </div>
 
-            {/* Texnologiya banneri */}
+            {/* Second image */}
             <motion.div
-              variants={fadeUpVariant}
-              className="col-span-2 relative rounded-3xl overflow-hidden h-48"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="relative mt-4 rounded-2xl overflow-hidden h-40"
+              style={{ border: "1px solid rgba(30,110,255,0.15)" }}
             >
               <img
                 src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80&auto=format&fit=crop"
@@ -130,20 +75,99 @@ export default function About() {
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-900/40 flex items-center p-6 gap-4">
-                <div className="flex -space-x-2">
-                  {["#3370ff", "#00d4ff", "#7b6eff", "#10b981"].map((color) => (
-                    <div key={color} className="w-8 h-8 rounded-full border-2 border-slate-800 flex items-center justify-center" style={{ backgroundColor: `${color}30`, borderColor: `${color}60` }}>
-                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: color }} />
-                    </div>
-                  ))}
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-white">Çoxsahəli komanda</p>
-                  <p className="text-xs text-slate-400">Mühəndislər, arxitektlər və analitiklər</p>
-                </div>
-              </div>
+              <div className="absolute inset-0" style={{ background: "rgba(5,13,26,0.5)" }} />
             </motion.div>
+
+            {/* Stats overlay */}
+            <div className="grid grid-cols-2 gap-3 mt-4">
+              {STATS.map(({ value, label }, i) => (
+                <motion.div
+                  key={label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.4 + i * 0.08 }}
+                  className="p-4 rounded-xl text-center"
+                  style={{
+                    background: i === 0 ? "rgba(201,168,76,0.1)" : "rgba(255,255,255,0.03)",
+                    border: i === 0 ? "1px solid rgba(201,168,76,0.25)" : "1px solid rgba(255,255,255,0.06)",
+                  }}
+                >
+                  <p className={`font-display font-bold text-2xl ${i === 0 ? "gold-text" : ""}`} style={{ color: i === 0 ? undefined : "#E8EDF5" }}>{value}</p>
+                  <p className="text-xs mt-1" style={{ color: "rgba(232,237,245,0.5)" }}>{label}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right – copy */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="flex flex-col gap-8"
+          >
+            <div className="flex flex-col gap-4">
+              <span className="text-xs font-medium tracking-widest uppercase" style={{ color: "#C9A84C" }}>— Haqqımızda</span>
+              <h2 className="font-display font-bold text-4xl md:text-5xl leading-tight" style={{ color: "#E8EDF5" }}>
+                Etibar üzərində qurulmuş,{" "}
+                <span className="gold-text">İnnovasiya ilə idarə olunan</span>
+              </h2>
+              <p className="text-base leading-relaxed" style={{ color: "rgba(232,237,245,0.6)" }}>
+                ElTek Azərbaycanın aparıcı IT şirkətidir. Bizi seçən müəssisələr yalnız texniki xidmət deyil,
+                etibarlı bir tərəfdaş qazanır. Hər layihədə müştərinin uğurunu öz uğurumuz kimi qəbul edirik.
+              </p>
+            </div>
+
+            {/* Mission & Vision */}
+            <div className="flex flex-col gap-4">
+              {[
+                {
+                  icon: Target,
+                  label: "Missiyamız",
+                  text: "Hər ölçüdə olan təşkilatları etibarlı, innovativ və təhlükəsiz texnoloji həllərlə gücləndirmək.",
+                  color: "#1E6EFF",
+                },
+                {
+                  icon: Eye,
+                  label: "Vizyonumuz",
+                  text: "Bölgənin ən etibarlı texnologiya tərəfdaşı olmaq — mühəndislik mükəmməlliyi ilə insan mərkəzli dizaynın birləşdiyi şirkət.",
+                  color: "#C9A84C",
+                },
+              ].map(({ icon: Icon, label, text, color }) => (
+                <div
+                  key={label}
+                  className="flex gap-4 p-5 rounded-2xl transition-all duration-300"
+                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
+                >
+                  <div className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center mt-0.5" style={{ background: `${color}15`, border: `1px solid ${color}30` }}>
+                    <Icon className="w-5 h-5" style={{ color }} strokeWidth={1.75} />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-semibold text-sm mb-1" style={{ color: "#E8EDF5" }}>{label}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: "rgba(232,237,245,0.55)" }}>{text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Values */}
+            <div className="flex flex-col gap-3">
+              <p className="text-xs font-medium tracking-widest uppercase" style={{ color: "rgba(232,237,245,0.4)" }}>Dəyərlərimiz</p>
+              <div className="grid grid-cols-2 gap-2">
+                {VALUES.map((val) => (
+                  <div key={val} className="flex items-center gap-2 text-sm" style={{ color: "rgba(232,237,245,0.7)" }}>
+                    <CheckCircle className="w-3.5 h-3.5 flex-shrink-0" style={{ color: "#C9A84C" }} />
+                    {val}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <a href="#contact" className="btn-gold self-start">
+              Bizimlə Əlaqə Saxla
+            </a>
           </motion.div>
         </div>
       </div>

@@ -1,62 +1,54 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  HeadphonesIcon, Network, ShieldCheck, Code2, ArrowUpRight, type LucideIcon,
-} from "lucide-react";
-import { fadeUpVariant, staggerContainer } from "@/lib/utils";
-import SectionHeader from "@/components/ui/SectionHeader";
+import { HeadphonesIcon, Network, ShieldCheck, Code2, ArrowUpRight, type LucideIcon } from "lucide-react";
 
 interface Service {
   icon: LucideIcon;
+  number: string;
   title: string;
   description: string;
   features: string[];
-  accent: string;
-  accentBg: string;
   image: string;
+  accent: string;
 }
 
 const SERVICES: Service[] = [
   {
     icon: HeadphonesIcon,
+    number: "01",
     title: "IT Konsaltinq və Dəstək",
-    description:
-      "Strateji texnologiya rəhbərliyi və gündəlik texniki dəstək — sistemləriniz daim optimal işləsin, IT hədəfləriniz biznes məqsədlərinizlə uyğunlaşsın.",
+    description: "Strateji texnologiya rəhbərliyi və 7/24 texniki dəstək. Sistemləriniz daim optimal işləsin, IT hədəfləriniz biznes məqsədlərinizlə uyğunlaşsın.",
     features: ["7/24 Texniki Dəstək", "Strateji Planlaşdırma", "IT Audit", "SLA Zəmanəti"],
-    accent: "text-eltek-500",
-    accentBg: "bg-eltek-500/10",
-    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&q=80&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80&auto=format&fit=crop",
+    accent: "#1E6EFF",
   },
   {
     icon: Network,
+    number: "02",
     title: "Şəbəkə və Sistem Həlləri",
-    description:
-      "Korporativ səviyyəli infrastrukturun dizaynı, qurulması və idarəsi — LAN/WAN-dan hibrid bulud arxitekturalarına qədər etibarlı həllər.",
+    description: "Korporativ infrastrukturun dizaynı, qurulması və idarəsi. LAN/WAN-dan hibrid bulud arxitekturalarına qədər etibarlı həllər.",
     features: ["Bulud Miqrasiyası", "SD-WAN Qurulumu", "Server İdarəetməsi", "Fövqəladə Bərpa"],
-    accent: "text-cyan-500",
-    accentBg: "bg-cyan-500/10",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80&auto=format&fit=crop",
+    accent: "#C9A84C",
   },
   {
     icon: ShieldCheck,
-    title: "Kibertəhlükəsizlik Xidmətləri",
-    description:
-      "Hərtərəfli təhlükəsizlik qiymətləndirilməsi və müdafiə sistemləri — məlumatlarınızı, endpointlərinizi və perimetrinizi müasir təhdidlərdən qoruyur.",
+    number: "03",
+    title: "Kibertəhlükəsizlik",
+    description: "Hərtərəfli təhlükəsizlik qiymətləndirilməsi və müdafiə sistemləri. Məlumatlarınızı müasir təhdidlərdən qoruyuruq.",
     features: ["Penetrasiya Testi", "SOC Monitorinqi", "ISO/GDPR Uyğunluğu", "Zero-Trust Arxitektura"],
-    accent: "text-emerald-500",
-    accentBg: "bg-emerald-500/10",
-    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=400&q=80&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&q=80&auto=format&fit=crop",
+    accent: "#10B981",
   },
   {
     icon: Code2,
+    number: "04",
     title: "Fərdi Proqram Təminatı",
-    description:
-      "Konsepsiyadan tətbiqə qədər tam proqram mühəndisliyi — iş axınınıza və böyümə hədəflərinizə uyğun hazırlanmış həllər.",
+    description: "Konsepsiyadan tətbiqə qədər tam proqram mühəndisliyi. İş axınınıza uyğun hazırlanmış web, mobil və korporativ həllər.",
     features: ["Web və Mobil Tətbiqlər", "API İnteqrasiyası", "ERP / CRM Sistemləri", "DevOps və CI/CD"],
-    accent: "text-purple-500",
-    accentBg: "bg-purple-500/10",
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&q=80&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80&auto=format&fit=crop",
+    accent: "#8B5CF6",
   },
 ];
 
@@ -64,51 +56,70 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
   const Icon = service.icon;
   return (
     <motion.article
-      variants={fadeUpVariant}
-      custom={index}
-      whileHover={{ y: -6 }}
-      transition={{ type: "spring", stiffness: 300, damping: 25 }}
-      className="group relative flex flex-col rounded-3xl overflow-hidden
-                 bg-white dark:bg-slate-900
-                 border border-slate-200/80 dark:border-slate-800
-                 hover:border-eltek-500/40 dark:hover:border-eltek-500/30
-                 shadow-sm hover:shadow-glow transition-all duration-300"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.6, delay: index * 0.12 }}
+      whileHover={{ y: -8 }}
+      className="group relative flex flex-col overflow-hidden rounded-2xl"
+      style={{
+        background: "rgba(255,255,255,0.03)",
+        border: "1px solid rgba(255,255,255,0.07)",
+        transition: "all 0.4s ease",
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLElement).style.borderColor = `${service.accent}40`;
+        (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
+        (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 60px ${service.accent}15`;
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.07)";
+        (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)";
+        (e.currentTarget as HTMLElement).style.boxShadow = "none";
+      }}
     >
-      {/* Şəkil */}
-      <div className="relative h-44 overflow-hidden">
+      {/* Image */}
+      <div className="relative h-48 overflow-hidden">
         <img
           src={service.image}
           alt={service.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-        <div className={`absolute bottom-3 left-4 w-10 h-10 rounded-xl ${service.accentBg} backdrop-blur-sm flex items-center justify-center border border-white/20`}>
-          <Icon className={`w-5 h-5 ${service.accent}`} strokeWidth={1.75} />
+        <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, transparent 20%, ${service.accent}20 60%, rgba(5,13,26,0.95) 100%)` }} />
+
+        {/* Number */}
+        <div className="absolute top-4 right-4 font-display font-bold text-4xl" style={{ color: `${service.accent}30`, lineHeight: 1 }}>
+          {service.number}
+        </div>
+
+        {/* Icon badge */}
+        <div
+          className="absolute bottom-4 left-4 w-11 h-11 rounded-xl flex items-center justify-center"
+          style={{ background: `${service.accent}20`, border: `1px solid ${service.accent}40`, backdropFilter: "blur(10px)" }}
+        >
+          <Icon className="w-5 h-5" style={{ color: service.accent }} strokeWidth={1.75} />
         </div>
       </div>
 
-      {/* Məzmun */}
+      {/* Content */}
       <div className="flex flex-col gap-4 p-6 flex-1">
-        <div className="flex flex-col gap-2">
-          <h3 className="font-display font-semibold text-lg text-slate-900 dark:text-white">
-            {service.title}
-          </h3>
-          <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-            {service.description}
-          </p>
-        </div>
+        <h3 className="font-display font-semibold text-lg" style={{ color: "#E8EDF5" }}>{service.title}</h3>
+        <p className="text-sm leading-relaxed" style={{ color: "rgba(232,237,245,0.55)" }}>{service.description}</p>
 
-        <ul className="flex flex-col gap-2 mt-auto" role="list">
+        <ul className="flex flex-col gap-2 mt-auto">
           {service.features.map((feat) => (
-            <li key={feat} className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
-              <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${service.accent.replace("text-", "bg-")}`} />
+            <li key={feat} className="flex items-center gap-2 text-xs" style={{ color: "rgba(232,237,245,0.6)" }}>
+              <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: service.accent }} />
               {feat}
             </li>
           ))}
         </ul>
 
-        <div className={`flex items-center gap-1 text-xs font-semibold ${service.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
+        <div
+          className="flex items-center gap-1 text-xs font-semibold mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          style={{ color: service.accent }}
+        >
           Ətraflı <ArrowUpRight className="w-3.5 h-3.5" />
         </div>
       </div>
@@ -118,33 +129,45 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
 
 export default function Services() {
   return (
-    <section
-      id="services"
-      aria-labelledby="services-title"
-      className="relative section-padding bg-slate-50/50 dark:bg-slate-900/40"
-    >
-      <div className="absolute inset-0 grid-bg opacity-50" aria-hidden="true" />
+    <section id="services" className="relative section" style={{ background: "var(--navy-2)" }}>
+      <div className="dot-pattern absolute inset-0 opacity-40" aria-hidden="true" />
+
       <div className="relative max-w-7xl mx-auto">
-        <div className="flex justify-center mb-16">
-          <SectionHeader
-            eyebrow="Nə Edirik"
-            title="Hərtərəfli IT"
-            titleHighlight="Xidmətləri"
-            description="İnfrastrukturunuzu qorumaqdan tutmuş növbəti məhsulunuzu yaratmağa qədər — ElTek ambisiyalarınızla böyüyən texnoloji həllər təqdim edir."
-          />
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col gap-4"
+          >
+            <span className="text-xs font-medium tracking-widest uppercase" style={{ color: "#C9A84C" }}>
+              — Nə Edirik
+            </span>
+            <h2 className="font-display font-bold text-4xl md:text-5xl leading-tight" style={{ color: "#E8EDF5" }}>
+              Hərtərəfli IT<br />
+              <span className="gold-text">Xidmətləri</span>
+            </h2>
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-base max-w-sm leading-relaxed"
+            style={{ color: "rgba(232,237,245,0.55)" }}
+          >
+            İnfrastrukturunuzu qorumaqdan növbəti məhsulunuzu yaratmağa qədər —
+            ambisiyalarınızla böyüyən texnoloji həllər.
+          </motion.p>
         </div>
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6"
-          variants={staggerContainer(0.1)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-        >
-          {SERVICES.map((service, i) => (
-            <ServiceCard key={service.title} service={service} index={i} />
-          ))}
-        </motion.div>
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+          {SERVICES.map((s, i) => <ServiceCard key={s.title} service={s} index={i} />)}
+        </div>
       </div>
     </section>
   );
